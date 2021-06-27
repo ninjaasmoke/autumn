@@ -8,7 +8,7 @@ const Nav: React.FC = () => {
             animate={{ top: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
         >
-            <h1>Autumn</h1>
+            <h1>Logo</h1>
         </motion.nav>
     )
 }

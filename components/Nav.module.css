@@ -2,10 +2,11 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    padding: 20px;
+    padding: 20px 32px;
     border-bottom: 1px solid var(--border);
     position: fixed;
     top: -80px;
     left: 0;
     opacity: 0;
+    background-color: var(--bg);
 }
