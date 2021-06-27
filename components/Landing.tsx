@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useRouter } from 'next/router';
 import landingStyle from './Landing.module.css';
 import utils from '../styles/utils.module.css';
 
 const Landing: React.FC = () => {
+    const router = useRouter();
     const container = {
         hidden: { opacity: 0 },
         show: {
@@ -67,7 +69,11 @@ const Landing: React.FC = () => {
                 <div className={landingStyle.btnSpc} />
                 <motion.button
                     className={utils.outlinedBtn}
-                    variants={opItem}>
+                    variants={opItem}
+                    onClick={() => {
+                        router.push('/new')
+                    }}
+                >
                     Get started
                 </motion.button>
             </motion.div>

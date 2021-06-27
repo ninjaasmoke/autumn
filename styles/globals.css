@@ -1,11 +1,17 @@
 :root {
   --bg: #000;
+  --secBg: #111;
+
   --accent: #40cd92;
+  --accentShadow: #40cd9288;
+
   --color: #f0f0f0;
   --secColor: #cdddcd;
+
+  --ter: #222;
+
   --border: #66666633;
 
-  --accentShadow: #40cd9288;
 }
 
 html,
