@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+
+import { Controlled as CodeMirror } from 'react-codemirror2'
+
 import newStyle from '../styles/New.module.css';
 
 const New: React.FC = () => {
-    const [openRightBar, setOpenRightBar] = useState<boolean>(false);
+    const router = useRouter();
+    const [openRightBar, setOpenRightBar] = useState<boolean>(true);
     return (
         <div className={newStyle.new}>
             <Head>
                 <title>autumn | new</title>
             </Head>
+
+            <div className={newStyle.back} onClick={() => router.back()}>
+                ←
+            </div>
+
+            <Editor />
 
             <motion.div
                 className={newStyle.rightBar}
@@ -29,6 +41,7 @@ const New: React.FC = () => {
                         src="/icons/collapse.png"
                         alt="Collapse"
                         animate={{ rotateZ: openRightBar ? 0 : 180 }}
+                        transition={{ duration: .3 }}
                     />
                     <motion.p
                         animate={{
@@ -51,9 +64,11 @@ interface RightElemProp {
 const RightElem: React.FC<RightElemProp> = ({ imgSrc, title, open }) => {
     return (
         <div className={newStyle.rEle}>
-            <img
+            <Image
                 src={imgSrc}
-                alt="Collapse"
+                alt={title}
+                width={16}
+                height={16}
             />
             <motion.p
                 animate={{
@@ -64,9 +79,27 @@ const RightElem: React.FC<RightElemProp> = ({ imgSrc, title, open }) => {
     )
 }
 
-const Editor: React.FC = () => (
-    <div></div>
-)
+interface EditorProp { }
+const Editor: React.FC<EditorProp> = () => {
+    const [code, setCode] = useState<string>('');
+    return (
+        <div id="editor" className={newStyle.editor}>
+            <CodeMirror
+                onBeforeChange={(editor, data, val) => {
+                    setCode(val);
+                }}
+                value={code}
+                onChange={(editor, data, val) => {
+                    setCode(val);
+                }}
+                options={{
+                    lineNumbers: true,
+                    mode: 'javascript'
+                }}
+            />
+        </div>
+    )
+}
 
 
 export default New;

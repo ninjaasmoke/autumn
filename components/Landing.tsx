@@ -52,7 +52,7 @@ const Landing: React.FC = () => {
                 <motion.div
                     className={landingStyle.head}
                     variants={slideItem}>
-                    Beautify code,<br />
+                    Beautiful code,<br />
                     with <span>Autumn</span>
                 </motion.div>
                 <motion.div
