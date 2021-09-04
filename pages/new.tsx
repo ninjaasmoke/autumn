@@ -405,9 +405,9 @@ const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, th
                 <div className={newStyle.editorPadding}>
                     <div className={newStyle.topBar}>
                         <div className={newStyle.topButtons}>
-                            <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(196, 5, 5)" }} />
+                            <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(196, 32, 20)" }} />
                             <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(255, 217, 0)" }} />
-                            <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(22, 209, 84)" }} />
+                            <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(28, 204, 92)" }} />
                         </div>
                         <input type="text" name="filename" id="filename"
                             className={newStyle.filename}
