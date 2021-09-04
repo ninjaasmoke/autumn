@@ -137,9 +137,9 @@ const selectStyle = {
 }
 
 const paddingSizes = {
-    0: {w: 960, h: 544},
-    50: {w: 1080, h: 648},
-    100: {w: 1200, h: 720},
+    0: { w: 960, h: 544 },
+    50: { w: 1040, h: 596 },
+    100: { w: 1120, h: 648 },
 }
 
 
@@ -185,9 +185,40 @@ const New: React.FC = () => {
                 <div
                     className={newStyle.rEles}>
 
+                    <div className={newStyle.rEle}
+                        style={{ padding: '12px 0px' }}
+                        onClick={() => {
+                            // toJpeg(document.getElementById('editor'), { quality: 0.92 })
+                            //     .then(function (dataUrl) {
+                            //         var link = document.createElement('a');
+                            //         link.download = fileName + ".jpeg";
+                            //         link.href = dataUrl;
+                            //         link.click();
+                            //     });
+                            toPng(document.getElementById('editor'))
+                            .then(function (blob) {
+                                const link = document.createElement('a');
+                                link.download = fileName + ".png";
+                                link.href = blob;
+                                link.click();
+                            })
+                        }} >
+                        <motion.img
+                            src="/icons/download.png"
+                            alt="Download"
+                            transition={{ duration: .3 }}
+                        />
+                        <motion.p
+                            animate={{
+                                display: openRightBar ? 'block' : 'none'
+                            }}
+                        >Download</motion.p>
+                    </div>
+
                     <div style={{
                         display: openRightBar ? "block" : "none",
                     }}>
+
                         <h5>Background</h5>
                         {bgNames.map((bg, i) => {
                             return (
@@ -301,7 +332,7 @@ interface EditorProps {
     setFileName: React.Dispatch<React.SetStateAction<string>>,
     edWidth: number,
     edHeight: number
-    
+
 }
 const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, theme, ext, fileName, setFileName, edHeight, edWidth }) => {
     return (
