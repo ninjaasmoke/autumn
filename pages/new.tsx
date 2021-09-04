@@ -1,26 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import AceEditor from "react-ace";
 import Select from 'react-select';
 import { toPng } from 'html-to-image';
 
 import newStyle from '../styles/New.module.css';
 
-import "../helper/imports";
+// import AceEditor from "react-ace";
+// import "../helper/imports";
 
 
-import "ace-builds/src-noconflict/theme-nord_dark";
-import "ace-builds/src-noconflict/theme-idle_fingers";
-import "ace-builds/src-noconflict/theme-clouds_midnight";
-import "ace-builds/src-noconflict/theme-pastel_on_dark";
-import "ace-builds/src-noconflict/theme-mono_industrial";
-import "ace-builds/src-noconflict/theme-terminal";
-import "ace-builds/src-noconflict/theme-tomorrow";
-import "ace-builds/src-noconflict/theme-twilight";
-import "ace-builds/src-noconflict/theme-tomorrow_night_eighties";
-import "ace-builds/src-noconflict/theme-gob";
+// import "ace-builds/src-noconflict/theme-nord_dark";
+// import "ace-builds/src-noconflict/theme-idle_fingers";
+// import "ace-builds/src-noconflict/theme-clouds_midnight";
+// import "ace-builds/src-noconflict/theme-pastel_on_dark";
+// import "ace-builds/src-noconflict/theme-mono_industrial";
+// import "ace-builds/src-noconflict/theme-terminal";
+// import "ace-builds/src-noconflict/theme-tomorrow";
+// import "ace-builds/src-noconflict/theme-twilight";
+// import "ace-builds/src-noconflict/theme-tomorrow_night_eighties";
+// import "ace-builds/src-noconflict/theme-gob";
 
 const themeOptions = [
     { value: "nord_dark", label: "Nord Dark" },
@@ -200,12 +200,12 @@ const New: React.FC = () => {
                             //         link.click();
                             //     });
                             toPng(document.getElementById('editor'))
-                            .then(function (blob) {
-                                const link = document.createElement('a');
-                                link.download = fileName + ".png";
-                                link.href = blob;
-                                link.click();
-                            })
+                                .then(function (blob) {
+                                    const link = document.createElement('a');
+                                    link.download = fileName + ".png";
+                                    link.href = blob;
+                                    link.click();
+                                })
                         }} >
                         <motion.img
                             src="/icons/download.png"
@@ -339,70 +339,89 @@ interface EditorProps {
 
 }
 const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, theme, ext, fileName, setFileName, edHeight, edWidth }) => {
-    return (
-        <div
-            id="editor"
-            className={newStyle.editorWrapper}
-            style={{
-                width: edWidth, // 960 -> no padding
-                height: edHeight, // 492 -> no padding
-                background: bgs[background],
-            }}
-        >
-            <div className={newStyle.editorPadding}>
-                <div className={newStyle.topBar}>
-                    <div className={newStyle.topButtons}>
-                        <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(196, 5, 5)" }} />
-                        <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(255, 217, 0)" }} />
-                        <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(22, 209, 84)" }} />
+
+    if (typeof window !== 'undefined') {
+        const AceEditor = require('react-ace').default;
+
+        require("../helper/imports");
+
+
+        require("ace-builds/src-noconflict/theme-nord_dark");
+        require("ace-builds/src-noconflict/theme-idle_fingers");
+        require("ace-builds/src-noconflict/theme-clouds_midnight");
+        require("ace-builds/src-noconflict/theme-pastel_on_dark");
+        require("ace-builds/src-noconflict/theme-mono_industrial");
+        require("ace-builds/src-noconflict/theme-terminal");
+        require("ace-builds/src-noconflict/theme-tomorrow");
+        require("ace-builds/src-noconflict/theme-twilight");
+        require("ace-builds/src-noconflict/theme-tomorrow_night_eighties");
+        require("ace-builds/src-noconflict/theme-gob");
+        return (
+            <div
+                id="editor"
+                className={newStyle.editorWrapper}
+                style={{
+                    width: edWidth, // 960 -> no padding
+                    height: edHeight, // 492 -> no padding
+                    background: bgs[background],
+                }}
+            >
+                <div className={newStyle.editorPadding}>
+                    <div className={newStyle.topBar}>
+                        <div className={newStyle.topButtons}>
+                            <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(196, 5, 5)" }} />
+                            <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(255, 217, 0)" }} />
+                            <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(22, 209, 84)" }} />
+                        </div>
+                        <input type="text" name="filename" id="filename"
+                            className={newStyle.filename}
+                            placeholder={fileName}
+                            onChange={(e) => {
+                                setFileName(e.target.value);
+                            }}
+                            value={fileName}
+                            onBlur={(e) => {
+                                if (!e.target.value.includes(ext)) {
+                                    setFileName(e.target.value + "." + ext);
+                                }
+                            }}
+                            autoComplete="off"
+                            autoFocus={false}
+                            spellCheck={false}
+                            autoCorrect="off"
+                            autoCapitalize="off" />
+                        <div className={newStyle.topBuffer}></div>
                     </div>
-                    <input type="text" name="filename" id="filename"
-                        className={newStyle.filename}
-                        placeholder={fileName}
-                        onChange={(e) => {
-                            setFileName(e.target.value);
+                    <AceEditor
+                        placeholder="Start typing..."
+                        mode={mode}
+                        theme={theme}
+                        name="editor"
+                        width="912px"
+                        height="480px"
+                        className={newStyle.editor}
+                        style={{
+                            padding: '12px 0px'
                         }}
-                        value={fileName}
-                        onBlur={(e) => {
-                            if (!e.target.value.includes(ext)) {
-                                setFileName(e.target.value + "." + ext);
-                            }
-                        }}
-                        autoComplete="off"
-                        autoFocus={false}
-                        spellCheck={false}
-                        autoCorrect="off"
-                        autoCapitalize="off" />
-                    <div className={newStyle.topBuffer}></div>
+                        fontSize={14}
+                        showPrintMargin={false}
+                        showGutter={false}
+                        highlightActiveLine={false}
+                        wrapEnabled={true}
+                        onChange={(newCode) => setCode(newCode)}
+                        value={code}
+                        setOptions={{
+                            enableBasicAutocompletion: true,
+                            enableLiveAutocompletion: true,
+                            enableSnippets: false,
+                            showLineNumbers: false,
+                            tabSize: 4,
+                        }} />
                 </div>
-                <AceEditor
-                    placeholder="Start typing..."
-                    mode={mode}
-                    theme={theme}
-                    name="editor"
-                    width="912px"
-                    height="480px"
-                    className={newStyle.editor}
-                    style={{
-                        padding: '12px 0px'
-                    }}
-                    fontSize={14}
-                    showPrintMargin={false}
-                    showGutter={false}
-                    highlightActiveLine={false}
-                    wrapEnabled={true}
-                    onChange={(newCode) => setCode(newCode)}
-                    value={code}
-                    setOptions={{
-                        enableBasicAutocompletion: true,
-                        enableLiveAutocompletion: true,
-                        enableSnippets: false,
-                        showLineNumbers: false,
-                        tabSize: 4,
-                    }} />
             </div>
-        </div>
-    );
+        );
+    }
+    return <></>;
 }
 
 
