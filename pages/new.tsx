@@ -4,9 +4,11 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import AceEditor from "react-ace";
 
-import { toPng, toJpeg } from 'html-to-image';
+import { toPng } from 'html-to-image';
 
 import newStyle from '../styles/New.module.css';
+
+import "../helper/imports";
 
 import "ace-builds/src-noconflict/mode-javascript";
 
