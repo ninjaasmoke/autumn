@@ -11,6 +11,13 @@
     align-items: center;
 }
 
+.smallScreenMsg {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--color);
+    display: none;
+}
+
 .rightBar {
     position: absolute;
     top: 0;
@@ -178,4 +185,16 @@
     background-color: #141416;
     border-radius: 6px;
     padding: 12px;
+}
+
+@media screen and (max-width: 980px) {
+    .rightBar {
+        display: none;
+    }
+    .editorWrapper {
+        display: none;
+    }
+    .smallScreenMsg {
+        display: block;
+    }
 }

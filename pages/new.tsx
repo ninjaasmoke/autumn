@@ -163,6 +163,10 @@ const New: React.FC = () => {
                 <title>autumn | new</title>
             </Head>
 
+            <div className={newStyle.smallScreenMsg}>
+                Buy a bigger screen to use this app. 🙂
+            </div>
+
             <EditorElem
                 edHeight={padSize.h}
                 edWidth={padSize.w}
