@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
-
-import { Controlled as CodeMirror } from 'react-codemirror2'
+import AceEditor from "react-ace";
 
 import newStyle from '../styles/New.module.css';
 
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/theme-nord_dark";
+
 const New: React.FC = () => {
-    const router = useRouter();
     const [openRightBar, setOpenRightBar] = useState<boolean>(true);
     return (
         <div className={newStyle.new}>
@@ -17,11 +17,7 @@ const New: React.FC = () => {
                 <title>autumn | new</title>
             </Head>
 
-            <div className={newStyle.back} onClick={() => router.back()}>
-                ←
-            </div>
-
-            <Editor />
+            <EditorElem />
 
             <motion.div
                 className={newStyle.rightBar}
@@ -79,26 +75,49 @@ const RightElem: React.FC<RightElemProp> = ({ imgSrc, title, open }) => {
     )
 }
 
-interface EditorProp { }
-const Editor: React.FC<EditorProp> = () => {
-    const [code, setCode] = useState<string>('');
+interface EditorProps { }
+const EditorElem: React.FC<EditorProps> = () => {
     return (
-        <div id="editor" className={newStyle.editor}>
-            <CodeMirror
-                onBeforeChange={(editor, data, val) => {
-                    setCode(val);
-                }}
-                value={code}
-                onChange={(editor, data, val) => {
-                    setCode(val);
-                }}
-                options={{
-                    lineNumbers: true,
-                    mode: 'javascript'
-                }}
-            />
+        <div className={newStyle.editorWrapper}>
+            <div className={newStyle.editorPadding}>
+               <div className={newStyle.topBar}>
+                   <div className={newStyle.topButtons}>
+                       <div className={newStyle.topBarButton} style={{backgroundColor: "rgb(196, 5, 5)"}} />
+                       <div className={newStyle.topBarButton} style={{backgroundColor: "rgb(255, 217, 0)"}} />
+                       <div className={newStyle.topBarButton} style={{backgroundColor: "rgb(22, 209, 84)"}} />
+                   </div>
+                   <input type="text" name="filename" id="filename" className={newStyle.filename} placeholder="Untitled" autoComplete="off" autoFocus={false} autoCorrect="off" />
+                   <div className={newStyle.topBuffer}></div>
+               </div>
+                <AceEditor
+                    placeholder="Type something..."
+                    mode="javascript"
+                    theme="nord_dark"
+                    name="blah2"
+                    width="912px"
+                    height="480px"
+                    className={newStyle.editor}
+                    style={{
+                        padding: '12px 0px'
+                    }}
+                    fontSize={14}
+                    showPrintMargin={false}
+                    showGutter={false}                                    
+                    highlightActiveLine={false}
+                    value={`
+    function hello() {
+        console.log("Hello World!");
+    }`}
+                    setOptions={{
+                        enableBasicAutocompletion: true,
+                        enableLiveAutocompletion: true,
+                        enableSnippets: true,
+                        showLineNumbers: true,
+                        tabSize: 4,
+                    }} />
+            </div>
         </div>
-    )
+    );
 }
 
 
