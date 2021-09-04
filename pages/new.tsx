@@ -339,8 +339,12 @@ interface EditorProps {
 
 }
 const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, theme, ext, fileName, setFileName, edHeight, edWidth }) => {
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && mounted) {
         const AceEditor = require('react-ace').default;
 
         require("../helper/imports");
@@ -421,7 +425,7 @@ const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, th
             </div>
         );
     }
-    return <></>;
+    return <>Initializing...</>;
 }
 
 
