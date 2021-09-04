@@ -184,7 +184,7 @@ const New: React.FC = () => {
             <motion.div
                 className={newStyle.rightBar}
                 initial={{ width: "52px" }}
-                animate={{ width: openRightBar ? 240 : 52, backgroundColor: openRightBar ? "var(--secBg)" : "transparent" }}
+                animate={{ width: openRightBar ? 240 : 48, backgroundColor: openRightBar ? "var(--secBg)" : "var(--bg)" }}
                 transition={{ ease: 'easeOut', duration: 0.2 }}
             >
                 <div
