@@ -74,8 +74,15 @@ const Landing: React.FC = () => {
                         router.push('/new')
                     }}
                 >
-                    Get started
+                    Get started  ⚡
                 </motion.button>
+                <div className={landingStyle.btnSpc} />
+                <motion.p
+                    className={utils.smallScreen}
+                    variants={opItem}
+                >
+                     Buy a real screen first⚡
+                </motion.p>
             </motion.div>
         </div>
     )

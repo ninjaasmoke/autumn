@@ -19,3 +19,19 @@
     background-color: var(--accent);
     color: var(--bg);
 }
+
+.smallScreen {
+    display: none;
+}
+
+@media screen and (max-width: 912px) {
+   .outlinedBtn {
+       display: none;
+   }
+   .smallScreen {
+       width: 100%;
+       display: block;
+       color: var(--accent);
+       padding: 12px 6px;
+   }
+}
