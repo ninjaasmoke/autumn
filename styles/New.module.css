@@ -30,9 +30,15 @@
     width: 100%;
 }
 
-.rEles h4 {
+.rEles h5 {
     padding: 12px 6px;
     border-bottom: 1px solid var(--border);
+    color: var(--color);
+}
+
+.rEles button img {
+    width: 16px;
+    height: 16px;
 }
 
 .rEle {
@@ -73,6 +79,19 @@
     margin: 4px 0;
     cursor: pointer;
     font-weight: 700;
+    border-radius: 4px;
+}
+
+.select {
+    background-color: #141414;
+}
+
+.downloadBtn {
+    padding: 8px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
 }
 
 .editorWrapper {
