@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import AceEditor from "react-ace";
 
-import domtoimage from 'dom-to-image';
+import { toPng, toJpeg } from 'html-to-image';
 
 import newStyle from '../styles/New.module.css';
 
@@ -76,20 +76,19 @@ const New: React.FC = () => {
                                 </div>
                             )
                         })}
-                    </div>
-
-                    <button
-                        onClick={() => {
-                            var edit = document.getElementById("editor");
-                            domtoimage.toJpeg(edit, { quality: 0.95 })
-                                .then(function (dataUrl) {
+                        <button
+                            onClick={() => {
+                                var edit = document.getElementById("editor");
+                                toPng(edit).then(function (dataUrl) {
                                     var link = document.createElement('a');
-                                    link.download = 'autumn-code.jpeg';
+                                    link.download = 'autumn-code.png';
                                     link.href = dataUrl;
                                     link.click();
-                                });
-                        }}
-                    >Download</button>
+                                })
+                            }}
+                        >Download</button>
+                    </div>
+
                 </div>
 
                 <div className={newStyle.rEle}

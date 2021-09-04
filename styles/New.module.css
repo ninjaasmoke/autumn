@@ -76,6 +76,7 @@
 }
 
 .editorWrapper {
+    font-family: 'Raleway',sans-serif;
     justify-content: center;
     align-items: center;
     display: flex;
@@ -87,6 +88,7 @@
 }
 
 .editorPadding {
+    font-family: 'Raleway',sans-serif;
     background-color: #141418;
     padding: 12px 24px;
     border-radius: 6px;
@@ -126,7 +128,7 @@
 }
 
 .filename {
-    font-family: 'Product Sans', 'Raleway',sans-serif;
+    font-family: 'Raleway',sans-serif;
     background: none;
     border: none;
     outline: none;
