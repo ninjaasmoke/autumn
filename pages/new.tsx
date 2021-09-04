@@ -41,58 +41,58 @@ const bgNames = ["fireandice", "candy", "candy2", "educate", "pinotnoir", "plain
 
 const options = [
     { value: 'cobol', label: 'Cobol' },
-    {value: 'coffee', label: 'Coffee'},
-    {value: 'csharp', label: 'C#'},
-    {value: 'css', label: 'CSS'},
-    {value: 'c_cpp', label: 'C & Cpp'},
-    {value: 'dart', label: 'Dart'},
-    {value: 'django', label: 'Django'},
-    {value: 'ejs', label: 'EJS'},
-    {value: 'elixir', label: 'Elixir'},
-    {value: 'fortran', label: 'Fortran'},
-    {value: 'fsharp', label: 'F#'},
-    {value: 'golang', label: 'Go'},
-    {value: 'html', label: 'HTML'},
-    {value: 'ini', label: 'INI'},
-    {value: 'io', label: 'Io'},
-    {value: 'jack', label: 'Jack'},
-    {value: 'jade', label: 'Jade'},
-    {value: 'java', label: 'Java'},
-    {value: 'javascript', label: 'JavaScript'},
-    {value: 'json', label: 'JSON'},
-    {value: 'json5', label: 'JSON5'},
-    {value: 'jsx', label: 'JSX'},
-    {value: 'kotlin', label: 'Kotlin'},
-    {value: 'less', label: 'Less'},
-    {value: 'markdown', label: 'Markdown'},
-    {value: 'matlab', label: 'Matlab'},
-    {value: 'mysql', label: 'MySQL'},
-    {value: 'nginx', label: 'Nginx'},
-    {value: 'objectivec', label: 'Objective-C'},
-    {value: 'pascal', label: 'Pascal'},
-    {value: 'perl', label: 'Perl'},
-    {value: 'pgsql', label: 'PostgreSQL'},
-    {value: 'php', label: 'PHP'},
-    {value: 'plain_text', label: 'Plain Text'},
-    {value: 'python', label: 'Python'},
-    {value: 'r', label: 'R'},
-    {value: 'ruby', label: 'Ruby'},
-    {value: 'rust', label: 'Rust'},
-    {value: 'sass', label: 'Sass'},
-    {value: 'scala', label: 'Scala'},
-    {value: 'scss', label: 'SCSS'},
-    {value: 'sql', label: 'SQL'},
-    {value: 'swift', label: 'Swift'},
-    {value: 'tcl', label: 'Tcl'},
-    {value: 'text', label: 'Text'},
-    {value: 'tsx', label: 'TSX'},
-    {value: 'turtle', label: 'Turtle'},
-    {value: 'typescript', label: 'TypeScript'},
-    {value: 'vbscript', label: 'VBScript'},
-    {value: 'verilog', label: 'Verilog'},
-    {value: 'vhdl', label: 'VHDL'},
-    {value: 'xml', label: 'XML'},
-    {value: 'yaml', label: 'YAML'},
+    { value: 'coffee', label: 'Coffee' },
+    { value: 'csharp', label: 'C#' },
+    { value: 'css', label: 'CSS' },
+    { value: 'c_cpp', label: 'C & Cpp' },
+    { value: 'dart', label: 'Dart' },
+    { value: 'django', label: 'Django' },
+    { value: 'ejs', label: 'EJS' },
+    { value: 'elixir', label: 'Elixir' },
+    { value: 'fortran', label: 'Fortran' },
+    { value: 'fsharp', label: 'F#' },
+    { value: 'golang', label: 'Go' },
+    { value: 'html', label: 'HTML' },
+    { value: 'ini', label: 'INI' },
+    { value: 'io', label: 'Io' },
+    { value: 'jack', label: 'Jack' },
+    { value: 'jade', label: 'Jade' },
+    { value: 'java', label: 'Java' },
+    { value: 'javascript', label: 'JavaScript' },
+    { value: 'json', label: 'JSON' },
+    { value: 'json5', label: 'JSON5' },
+    { value: 'jsx', label: 'JSX' },
+    { value: 'kotlin', label: 'Kotlin' },
+    { value: 'less', label: 'Less' },
+    { value: 'markdown', label: 'Markdown' },
+    { value: 'matlab', label: 'Matlab' },
+    { value: 'mysql', label: 'MySQL' },
+    { value: 'nginx', label: 'Nginx' },
+    { value: 'objectivec', label: 'Objective-C' },
+    { value: 'pascal', label: 'Pascal' },
+    { value: 'perl', label: 'Perl' },
+    { value: 'pgsql', label: 'PostgreSQL' },
+    { value: 'php', label: 'PHP' },
+    { value: 'plain_text', label: 'Plain Text' },
+    { value: 'python', label: 'Python' },
+    { value: 'r', label: 'R' },
+    { value: 'ruby', label: 'Ruby' },
+    { value: 'rust', label: 'Rust' },
+    { value: 'sass', label: 'Sass' },
+    { value: 'scala', label: 'Scala' },
+    { value: 'scss', label: 'SCSS' },
+    { value: 'sql', label: 'SQL' },
+    { value: 'swift', label: 'Swift' },
+    { value: 'tcl', label: 'Tcl' },
+    { value: 'text', label: 'Text' },
+    { value: 'tsx', label: 'TSX' },
+    { value: 'turtle', label: 'Turtle' },
+    { value: 'typescript', label: 'TypeScript' },
+    { value: 'vbscript', label: 'VBScript' },
+    { value: 'verilog', label: 'Verilog' },
+    { value: 'vhdl', label: 'VHDL' },
+    { value: 'xml', label: 'XML' },
+    { value: 'yaml', label: 'YAML' },
 ];
 
 const New: React.FC = () => {
@@ -128,9 +128,12 @@ const New: React.FC = () => {
                         <h5>Background</h5>
                         {bgNames.map((bg, i) => {
                             return (
-                                <div key={i} onClick={() => setBackgroundTheme(bg)} className={newStyle.bgOption} style={{
-                                    background: bgs[bg],
-                                }}>
+                                <div key={i} onClick={() => setBackgroundTheme(bg)}
+                                    className={newStyle.bgOption}
+                                    style={{
+                                        background: bgs[bg],
+                                        outline: backgroundTheme === bg ? "2px solid #fff" : "none",                                        
+                                    }}>
                                     {bg}
                                 </div>
                             )
@@ -145,37 +148,38 @@ const New: React.FC = () => {
                             options={options}
                             styles={{
                                 control: (base: any) => {
-                                  return {
-                                    ...base,
-                                    fontSize: "12px",
-                                    fontWeight: 700,
-                                    backgroundColor: "#242424",
-                                    border: "none",
-                                    borderRadius: "5px",
-                                    "&:hover": {
+                                    return {
+                                        ...base,
+                                        fontSize: "12px",
+                                        fontWeight: 700,
+                                        backgroundColor: "#242424",
                                         border: "none",
-                                        boxShadow: "none",
-                                    },
-                                  }
+                                        borderRadius: "5px",
+                                        "&:hover": {
+                                            border: "none",
+                                            boxShadow: "none",
+                                        },
+                                    }
                                 },
                                 input: styles => ({ ...styles, color: "white", fontWeight: 700, fontSize: "12px" }),
-                                singleValue: (styles) => ({ ...styles, 
+                                singleValue: (styles) => ({
+                                    ...styles,
                                     color: "white"
                                 }),
                                 option: (styles) => {
                                     return {
-                                      ...styles,
-                                      color: "black",
-                                      fontSize: "12px",
-                                      fontWeight: 700,
-                                      border: "none",
-                                      outline: "none",
-                                      "&:hover": {
+                                        ...styles,
+                                        color: "black",
+                                        fontSize: "12px",
+                                        fontWeight: 700,
                                         border: "none",
-                                        boxShadow: "none",
-                                    },
+                                        outline: "none",
+                                        "&:hover": {
+                                            border: "none",
+                                            boxShadow: "none",
+                                        },
                                     };
-                                  },
+                                },
                             }}
                         />
                     </div>
