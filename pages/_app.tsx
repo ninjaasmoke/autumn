@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
           />
           <meta name="description" content="Code to image" />
           <meta name="keywords" content="code, image, screenshot" />
-          <meta name="theme-color" content="#141414" />
+          <meta name="theme-color" content="#000000" />
 
           
           <meta name="mobile-web-app-capable" content="yes" />
