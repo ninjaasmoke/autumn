@@ -22,10 +22,23 @@ import "ace-builds/src-noconflict/theme-twilight";
 import "ace-builds/src-noconflict/theme-tomorrow_night_eighties";
 import "ace-builds/src-noconflict/theme-gob";
 
+const themeOptions = [
+    { value: "nord_dark", label: "Nord Dark" },
+    { value: "idle_fingers", label: "Idle Fingers" },
+    { value: "clouds_midnight", label: "Clouds Midnight" },
+    { value: "pastel_on_dark", label: "Pastel On Dark" },
+    { value: "mono_industrial", label: "Mono Industrial" },
+    { value: "terminal", label: "Terminal" },
+    { value: "tomorrow", label: "Tomorrow" },
+    { value: "twilight", label: "Twilight" },
+    { value: "tomorrow_night_eighties", label: "Tomorrow Night Eighties" },
+    { value: "gob", label: "Gob" }
+];
+
 const bgs = {
     fireandice: "linear-gradient(-45deg, rgb(0, 0, 255), rgb(255, 0, 0))",
     candy: "linear-gradient(125deg, rgb(243, 8, 118), rgb(47, 0, 255))",
-    candy2: "linear-gradient(125deg, #7303c0, #ec38bc)",
+    candytoo: "linear-gradient(125deg, #7303c0, #ec38bc)",
     educate: "linear-gradient(125deg, #0d324d, #7f5a83)",
     pinotnoir: "linear-gradient(90deg,#4b6cb7,#182848)",
     plain: "linear-gradient(90deg, #141418, #141418)",
@@ -37,63 +50,91 @@ const bgs = {
     wine: "linear-gradient(125deg,#b38ac4, #2e033d)",
 }
 
-const bgNames = ["fireandice", "candy", "candy2", "educate", "pinotnoir", "plain", "royal", "sopink", "teal", "vanessa", "witching", "wine"];
+const bgNames = ["fireandice", "candy", "candytoo", "educate", "pinotnoir", "plain", "royal", "sopink", "teal", "vanessa", "witching", "wine"];
 
-const options = [
-    { value: 'cobol', label: 'Cobol' },
-    { value: 'coffee', label: 'Coffee' },
-    { value: 'csharp', label: 'C#' },
-    { value: 'css', label: 'CSS' },
-    { value: 'c_cpp', label: 'C & Cpp' },
-    { value: 'dart', label: 'Dart' },
-    { value: 'django', label: 'Django' },
-    { value: 'ejs', label: 'EJS' },
-    { value: 'elixir', label: 'Elixir' },
-    { value: 'fortran', label: 'Fortran' },
-    { value: 'fsharp', label: 'F#' },
-    { value: 'golang', label: 'Go' },
-    { value: 'html', label: 'HTML' },
-    { value: 'ini', label: 'INI' },
-    { value: 'io', label: 'Io' },
-    { value: 'jack', label: 'Jack' },
-    { value: 'jade', label: 'Jade' },
-    { value: 'java', label: 'Java' },
-    { value: 'javascript', label: 'JavaScript' },
-    { value: 'json', label: 'JSON' },
-    { value: 'json5', label: 'JSON5' },
-    { value: 'jsx', label: 'JSX' },
-    { value: 'kotlin', label: 'Kotlin' },
-    { value: 'less', label: 'Less' },
-    { value: 'markdown', label: 'Markdown' },
-    { value: 'matlab', label: 'Matlab' },
-    { value: 'mysql', label: 'MySQL' },
-    { value: 'nginx', label: 'Nginx' },
-    { value: 'objectivec', label: 'Objective-C' },
-    { value: 'pascal', label: 'Pascal' },
-    { value: 'perl', label: 'Perl' },
-    { value: 'pgsql', label: 'PostgreSQL' },
-    { value: 'php', label: 'PHP' },
-    { value: 'plain_text', label: 'Plain Text' },
-    { value: 'python', label: 'Python' },
-    { value: 'r', label: 'R' },
-    { value: 'ruby', label: 'Ruby' },
-    { value: 'rust', label: 'Rust' },
-    { value: 'sass', label: 'Sass' },
-    { value: 'scala', label: 'Scala' },
-    { value: 'scss', label: 'SCSS' },
-    { value: 'sql', label: 'SQL' },
-    { value: 'swift', label: 'Swift' },
-    { value: 'tcl', label: 'Tcl' },
-    { value: 'text', label: 'Text' },
-    { value: 'tsx', label: 'TSX' },
-    { value: 'turtle', label: 'Turtle' },
-    { value: 'typescript', label: 'TypeScript' },
-    { value: 'vbscript', label: 'VBScript' },
-    { value: 'verilog', label: 'Verilog' },
-    { value: 'vhdl', label: 'VHDL' },
-    { value: 'xml', label: 'XML' },
-    { value: 'yaml', label: 'YAML' },
+const langOptions = [
+    { value: 'cobol', label: 'Cobol', fileExtension: 'cbl' },
+    { value: 'coffee', label: 'Coffee', fileExtension: 'coffee' },
+    { value: 'csharp', label: 'C#', fileExtension: 'cs' },
+    { value: 'css', label: 'CSS', ileExtension: 'css' },
+    { value: 'c_cpp', label: 'C & Cpp', fileExtension: 'cpp' },
+    { value: 'dart', label: 'Dart', fileExtension: 'dart' },
+    { value: 'ejs', label: 'EJS', fileExtension: 'ejs' },
+    { value: 'elixir', label: 'Elixir', fileExtension: 'ex' },
+    { value: 'fortran', label: 'Fortran', fileExtension: 'f' },
+    { value: 'fsharp', label: 'F#', fileExtension: 'fs' },
+    { value: 'golang', label: 'Go', fileExtension: 'go' },
+    { value: 'html', label: 'HTML', fileExtension: 'html' },
+    { value: 'java', label: 'Java', fileExtension: 'java' },
+    { value: 'javascript', label: 'JavaScript', fileExtension: 'js' },
+    { value: 'json', label: 'JSON', fileExtension: 'json' },
+    { value: 'json5', label: 'JSON5', fileExtension: 'json5' },
+    { value: 'jsx', label: 'JSX', fileExtension: 'jsx' },
+    { value: 'kotlin', label: 'Kotlin', fileExtension: 'kt' },
+    { value: 'less', label: 'Less', fileExtension: 'less' },
+    { value: 'markdown', label: 'Markdown', fileExtension: 'md' },
+    { value: 'matlab', label: 'Matlab', fileExtension: 'm' },
+    { value: 'mysql', label: 'MySQL', fileExtension: 'sql' },
+    { value: 'objectivec', label: 'Objective-C', fileExtension: 'm' },
+    { value: 'pascal', label: 'Pascal', fileExtension: 'pas' },
+    { value: 'perl', label: 'Perl', fileExtension: 'pl' },
+    { value: 'php', label: 'PHP', fileExtension: 'php' },
+    { value: 'plain_text', label: 'Plain Text', fileExtension: 'txt' },
+    { value: 'python', label: 'Python', fileExtension: 'py' },
+    { value: 'r', label: 'R', fileExtension: 'r' },
+    { value: 'ruby', label: 'Ruby', fileExtension: 'rb' },
+    { value: 'rust', label: 'Rust', fileExtension: 'rs' },
+    { value: 'sass', label: 'Sass', fileExtension: 'sass' },
+    { value: 'scala', label: 'Scala', fileExtension: 'scala' },
+    { value: 'scss', label: 'SCSS', fileExtension: 'scss' },
+    { value: 'sql', label: 'SQL', fileExtension: 'sql' },
+    { value: 'swift', label: 'Swift', fileExtension: 'swift' },
+    { value: 'tcl', label: 'Tcl', fileExtension: 'tcl' },
+    { value: 'text', label: 'Text', fileExtension: 'txt' },
+    { value: 'tsx', label: 'TSX', fileExtension: 'tsx' },
+    { value: 'typescript', label: 'TypeScript', fileExtension: 'ts' },
+    { value: 'vbscript', label: 'VBScript', fileExtension: 'vbs' },
+    { value: 'verilog', label: 'Verilog', fileExtension: 'v' },
+    { value: 'vhdl', label: 'VHDL', fileExtension: 'vhdl' },
+    { value: 'xml', label: 'XML', fileExtension: 'xml' },
+    { value: 'yaml', label: 'YAML', fileExtension: 'yaml' },
 ];
+
+const selectStyle = {
+    control: (base: any) => {
+        return {
+            ...base,
+            fontSize: "12px",
+            fontWeight: 700,
+            backgroundColor: "#242424",
+            border: "none",
+            borderRadius: "5px",
+            "&:hover": {
+                border: "none",
+                boxShadow: "none",
+            },
+        }
+    },
+    input: styles => ({ ...styles, color: "white", fontWeight: 700, fontSize: "12px" }),
+    singleValue: (styles) => ({
+        ...styles,
+        color: "white"
+    }),
+    option: (styles) => {
+        return {
+            ...styles,
+            color: "black",
+            fontSize: "12px",
+            fontWeight: 700,
+            border: "none",
+            outline: "none",
+            "&:hover": {
+                border: "none",
+                boxShadow: "none",
+            },
+        };
+    },
+}
 
 const New: React.FC = () => {
     const [openRightBar, setOpenRightBar] = useState<boolean>(true);
@@ -102,7 +143,10 @@ const New: React.FC = () => {
 
     const [code, setCode] = useState<string>(``);
 
-    const [selLang, setSelLang] = useState<any>(options[0]);
+    const [selLang, setSelLang] = useState<any>(langOptions[13]);
+    const [selTheme, setSelTheme] = useState<any>(themeOptions[0]);
+
+    const [fileName, setFileName] = useState<string>("untitled." + selLang.fileExtension);
 
     const [backgroundTheme, setBackgroundTheme] = useState<string>(bgNames[Math.floor(Math.random() * bgNames.length)]);
     return (
@@ -111,7 +155,18 @@ const New: React.FC = () => {
                 <title>autumn | new</title>
             </Head>
 
-            <EditorElem edWidth={edWidth} edHeight={edHeight} background={backgroundTheme} code={code} setCode={setCode} mode={selLang.value} />
+            <EditorElem
+                edWidth={edWidth}
+                edHeight={edHeight}
+                background={backgroundTheme}
+                code={code}
+                setCode={setCode}
+                mode={selLang.value}
+                theme={selTheme.value}
+                ext={selLang.fileExtension}
+                fileName={fileName}
+                setFileName={setFileName}
+            />
 
             <motion.div
                 className={newStyle.rightBar}
@@ -132,55 +187,32 @@ const New: React.FC = () => {
                                     className={newStyle.bgOption}
                                     style={{
                                         background: bgs[bg],
-                                        outline: backgroundTheme === bg ? "2px solid #fff" : "none",                                        
+                                        outline: backgroundTheme === bg ? "2px solid #fff" : "none",
                                     }}>
                                     {bg}
                                 </div>
                             )
                         })}
+                        <h5>Theme</h5>
+                        <Select
+                            className={newStyle.select}
+                            value={selTheme}
+                            onChange={(e) => {
+                                setSelTheme(e);
+                            }}
+                            options={themeOptions}
+                            styles={selectStyle}
+                        />
                         <h5>Language</h5>
                         <Select
                             className={newStyle.select}
                             value={selLang}
                             onChange={(e) => {
                                 setSelLang(e);
+                                setFileName(fileName.split(".")[0] + "." + e.fileExtension);
                             }}
-                            options={options}
-                            styles={{
-                                control: (base: any) => {
-                                    return {
-                                        ...base,
-                                        fontSize: "12px",
-                                        fontWeight: 700,
-                                        backgroundColor: "#242424",
-                                        border: "none",
-                                        borderRadius: "5px",
-                                        "&:hover": {
-                                            border: "none",
-                                            boxShadow: "none",
-                                        },
-                                    }
-                                },
-                                input: styles => ({ ...styles, color: "white", fontWeight: 700, fontSize: "12px" }),
-                                singleValue: (styles) => ({
-                                    ...styles,
-                                    color: "white"
-                                }),
-                                option: (styles) => {
-                                    return {
-                                        ...styles,
-                                        color: "black",
-                                        fontSize: "12px",
-                                        fontWeight: 700,
-                                        border: "none",
-                                        outline: "none",
-                                        "&:hover": {
-                                            border: "none",
-                                            boxShadow: "none",
-                                        },
-                                    };
-                                },
-                            }}
+                            options={langOptions}
+                            styles={selectStyle}
                         />
                     </div>
 
@@ -238,8 +270,12 @@ interface EditorProps {
     code: string,
     setCode: React.Dispatch<React.SetStateAction<string>>,
     mode: string,
+    theme: string,
+    ext: string,
+    fileName: string,
+    setFileName: React.Dispatch<React.SetStateAction<string>>,
 }
-const EditorElem: React.FC<EditorProps> = ({ edWidth, edHeight, background, code, setCode, mode }) => {
+const EditorElem: React.FC<EditorProps> = ({ edWidth, edHeight, background, code, setCode, mode, theme, ext, fileName, setFileName }) => {
     return (
         <div
             id="editor"
@@ -259,7 +295,16 @@ const EditorElem: React.FC<EditorProps> = ({ edWidth, edHeight, background, code
                     </div>
                     <input type="text" name="filename" id="filename"
                         className={newStyle.filename}
-                        placeholder="Untitled"
+                        placeholder={fileName}
+                        onChange={(e) => {
+                            setFileName(e.target.value);
+                        }}
+                        value={fileName}
+                        onBlur={(e) => {
+                            if (!e.target.value.includes(ext)) {
+                                setFileName(e.target.value + "." + ext);
+                            }
+                        }}
                         autoComplete="off"
                         autoFocus={false}
                         spellCheck={false}
@@ -270,7 +315,7 @@ const EditorElem: React.FC<EditorProps> = ({ edWidth, edHeight, background, code
                 <AceEditor
                     placeholder="Start typing..."
                     mode={mode}
-                    theme="nord_dark"
+                    theme={theme}
                     name="editor"
                     width="912px"
                     height="480px"
@@ -288,8 +333,8 @@ const EditorElem: React.FC<EditorProps> = ({ edWidth, edHeight, background, code
                     setOptions={{
                         enableBasicAutocompletion: true,
                         enableLiveAutocompletion: true,
-                        enableSnippets: true,
-                        showLineNumbers: true,
+                        enableSnippets: false,
+                        showLineNumbers: false,
                         tabSize: 4,
                     }} />
             </div>
