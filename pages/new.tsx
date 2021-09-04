@@ -232,8 +232,10 @@ const New: React.FC = () => {
                                             className={newStyle.padOption}
                                             style={{
                                                 background: padSize.w === paddingSizes[pad].w && padSize.h === paddingSizes[pad].h ? "var(--accent)" : "var(--secBg)",
+                                                fontWeight: padSize.w === paddingSizes[pad].w && padSize.h === paddingSizes[pad].h ? 700 : 400,
+                                                color: padSize.w === paddingSizes[pad].w && padSize.h === paddingSizes[pad].h ? "black" : "var(--color)",
                                             }}>
-                                            {pad}
+                                            {pad}%
                                         </div>
                                     )
                                 })
