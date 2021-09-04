@@ -137,9 +137,10 @@ const selectStyle = {
 }
 
 const paddingSizes = {
-    0: { w: 960, h: 544 },
-    50: { w: 1040, h: 596 },
-    100: { w: 1120, h: 648 },
+    "0%": { w: 960, h: 544 },
+    "50%": { w: 1040, h: 596 },
+    "100%": { w: 1120, h: 648 },
+    full: { w: "98%", h: "100%" },
 }
 
 
@@ -147,7 +148,7 @@ const paddingSizes = {
 const New: React.FC = () => {
     const [openRightBar, setOpenRightBar] = useState<boolean>(true);
 
-    const [padSize, setPadSize] = useState(paddingSizes[100]);
+    const [padSize, setPadSize] = useState(paddingSizes["100%"]);
 
     const [code, setCode] = useState<string>(``);
 
@@ -183,7 +184,7 @@ const New: React.FC = () => {
             <motion.div
                 className={newStyle.rightBar}
                 initial={{ width: "52px" }}
-                animate={{ width: openRightBar ? 240 : 52, backgroundColor: openRightBar ? "var(--secBg)" : "var(--bg)" }}
+                animate={{ width: openRightBar ? 240 : 52, backgroundColor: openRightBar ? "var(--secBg)" : "transparent" }}
                 transition={{ ease: 'easeOut', duration: 0.2 }}
             >
                 <div
@@ -263,14 +264,45 @@ const New: React.FC = () => {
                             {
                                 Object.keys(paddingSizes).map((pad, i) => {
                                     return (
-                                        <div key={i} onClick={() => setPadSize(paddingSizes[pad])}
+                                        <div key={i} onClick={() => {
+                                            var elem = document.documentElement;
+
+                                            /* View in fullscreen */
+                                            function openFullscreen() {
+                                                if (elem.requestFullscreen) {
+                                                    try {
+                                                        elem.requestFullscreen();
+                                                    } catch (e) {
+                                                        console.log(e);
+                                                    }
+                                                }
+                                            }
+
+                                            /* Close fullscreen */
+                                            function closeFullscreen() {
+                                                if ( document.fullscreenElement && document.exitFullscreen) {
+                                                    try {
+                                                        document.exitFullscreen();
+                                                    } catch (e) {
+                                                        console.log(e);
+                                                    }
+                                                }
+                                            }
+                                            setPadSize(paddingSizes[pad]);
+                                            if (pad === "full") {
+                                                openFullscreen();
+                                            } else {
+                                                closeFullscreen();
+                                            }
+
+                                        }}
                                             className={newStyle.padOption}
                                             style={{
                                                 background: padSize.w === paddingSizes[pad].w && padSize.h === paddingSizes[pad].h ? "var(--accent)" : "var(--secBg)",
                                                 fontWeight: padSize.w === paddingSizes[pad].w && padSize.h === paddingSizes[pad].h ? 700 : 400,
                                                 color: padSize.w === paddingSizes[pad].w && padSize.h === paddingSizes[pad].h ? "black" : "var(--color)",
                                             }}>
-                                            {pad}%
+                                            {pad}
                                         </div>
                                     )
                                 })
