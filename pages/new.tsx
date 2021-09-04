@@ -4,6 +4,8 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import AceEditor from "react-ace";
 
+import domtoimage from 'dom-to-image';
+
 import newStyle from '../styles/New.module.css';
 
 import "ace-builds/src-noconflict/mode-javascript";
@@ -31,7 +33,7 @@ const bgs = {
     teal: "linear-gradient(125deg, rgb(0, 194, 194), rgb(0, 50, 80))",
     vanessa: "linear-gradient(125deg, #DA4453, #89216B)",
     witching: "linear-gradient(125deg, #c31432, #3d0000)",
-    wine: "linear-gradient(125deg,#b38ac4, #2e033d)", 
+    wine: "linear-gradient(125deg,#b38ac4, #2e033d)",
 }
 
 const bgNames = ["fireandice", "candy", "candy2", "educate", "pinotnoir", "plain", "royal", "sopink", "teal", "vanessa", "witching", "wine"];
@@ -75,6 +77,19 @@ const New: React.FC = () => {
                             )
                         })}
                     </div>
+
+                    <button
+                        onClick={() => {
+                            var edit = document.getElementById("editor");
+                            domtoimage.toJpeg(edit, { quality: 0.95 })
+                                .then(function (dataUrl) {
+                                    var link = document.createElement('a');
+                                    link.download = 'autumn-code.jpeg';
+                                    link.href = dataUrl;
+                                    link.click();
+                                });
+                        }}
+                    >Download</button>
                 </div>
 
                 <div className={newStyle.rEle}
@@ -147,7 +162,7 @@ const EditorElem: React.FC<EditorProps> = ({ edWidth, edHeight, background, code
                         <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(255, 217, 0)" }} />
                         <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(22, 209, 84)" }} />
                     </div>
-                    <input type="text" name="filename" id="filename" 
+                    <input type="text" name="filename" id="filename"
                         className={newStyle.filename}
                         placeholder="Untitled"
                         autoComplete="off"
