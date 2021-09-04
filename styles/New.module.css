@@ -18,7 +18,7 @@
     width: 52px;
     height: 100%;
     background-color: var(--secBg);
-    padding: 12px 4px;
+    padding: 12px 10px;
 
     display: flex;
     flex-direction: column;
@@ -33,6 +33,7 @@
 .rEles h5 {
     padding: 12px 6px;
     border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
     color: var(--color);
 }
 
@@ -67,10 +68,11 @@
     font-family: 'Product Sans', 'Raleway',sans-serif;
     font-weight: 900;
     padding-left: 8px;
+    font-size: 12px;
 }
 
 .bgOption {
-    padding: 8px;
+    padding: 6px;
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -82,6 +84,18 @@
     border-radius: 4px;
 
     transition: all 200ms ease;
+}
+
+.padOptions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.padOption {
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 .select {
@@ -103,7 +117,7 @@
     display: flex;
     flex-direction: column;
     padding: 24px;
-    border-radius: 4px;
+    border-radius: 8px;
 
     transition: all 400ms ease;  
 }

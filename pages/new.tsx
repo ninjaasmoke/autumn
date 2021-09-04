@@ -136,10 +136,18 @@ const selectStyle = {
     },
 }
 
+const paddingSizes = {
+    0: {w: 960, h: 544},
+    50: {w: 1080, h: 648},
+    100: {w: 1200, h: 720},
+}
+
+
+
 const New: React.FC = () => {
     const [openRightBar, setOpenRightBar] = useState<boolean>(true);
-    const [edWidth, setEdWidth] = useState<number>(1200);
-    const [edHeight, setEdHeight] = useState<number>(720);
+
+    const [padSize, setPadSize] = useState(paddingSizes[100]);
 
     const [code, setCode] = useState<string>(``);
 
@@ -156,8 +164,8 @@ const New: React.FC = () => {
             </Head>
 
             <EditorElem
-                edWidth={edWidth}
-                edHeight={edHeight}
+                edHeight={padSize.h}
+                edWidth={padSize.w}
                 background={backgroundTheme}
                 code={code}
                 setCode={setCode}
@@ -171,7 +179,7 @@ const New: React.FC = () => {
             <motion.div
                 className={newStyle.rightBar}
                 initial={{ width: "52px" }}
-                animate={{ width: openRightBar ? 240 : 52 }}
+                animate={{ width: openRightBar ? 240 : 52, backgroundColor: openRightBar ? "var(--secBg)" : "var(--bg)" }}
                 transition={{ ease: 'easeOut', duration: 0.2 }}
             >
                 <div
@@ -214,6 +222,23 @@ const New: React.FC = () => {
                             options={langOptions}
                             styles={selectStyle}
                         />
+
+                        <h5>Padding</h5>
+                        <div className={newStyle.padOptions}>
+                            {
+                                Object.keys(paddingSizes).map((pad, i) => {
+                                    return (
+                                        <div key={i} onClick={() => setPadSize(paddingSizes[pad])}
+                                            className={newStyle.padOption}
+                                            style={{
+                                                background: padSize.w === paddingSizes[pad].w && padSize.h === paddingSizes[pad].h ? "var(--accent)" : "var(--secBg)",
+                                            }}>
+                                            {pad}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
 
                 </div>
@@ -264,8 +289,6 @@ const RightElem: React.FC<RightElemProp> = ({ imgSrc, title, open }) => {
 }
 
 interface EditorProps {
-    edWidth: number,
-    edHeight: number,
     background: string,
     code: string,
     setCode: React.Dispatch<React.SetStateAction<string>>,
@@ -274,8 +297,11 @@ interface EditorProps {
     ext: string,
     fileName: string,
     setFileName: React.Dispatch<React.SetStateAction<string>>,
+    edWidth: number,
+    edHeight: number
+    
 }
-const EditorElem: React.FC<EditorProps> = ({ edWidth, edHeight, background, code, setCode, mode, theme, ext, fileName, setFileName }) => {
+const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, theme, ext, fileName, setFileName, edHeight, edWidth }) => {
     return (
         <div
             id="editor"
