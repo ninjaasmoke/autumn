@@ -46,7 +46,7 @@ const bgs = {
     sopink: "linear-gradient(90deg,#ff0084,#33001b)",
     teal: "linear-gradient(125deg, rgb(0, 194, 194), rgb(0, 50, 80))",
     vanessa: "linear-gradient(125deg, #DA4453, #89216B)",
-    witching: "linear-gradient(125deg, #c31432, #3d0000)",
+    witching: "linear-gradient(to right, #ff8177 0%, #ff867a 0%, #ff8c7f 21%, #f99185 52%, #cf556c 78%, #b12a5b 100%)",
     wine: "linear-gradient(125deg,#b38ac4, #2e033d)",
 }
 
