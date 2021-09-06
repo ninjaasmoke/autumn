@@ -40,13 +40,14 @@ const bgs = {
     candy: "linear-gradient(125deg, rgb(243, 8, 118), rgb(47, 0, 255))",
     candytoo: "linear-gradient(125deg, #7303c0, #ec38bc)",
     educate: "linear-gradient(125deg, #0d324d, #7f5a83)",
+    grape: "linear-gradient(to left, #ad5389, #3c1053)",
     pinotnoir: "linear-gradient(90deg,#4b6cb7,#182848)",
     plain: "linear-gradient(90deg, #141418, #141418)",
     royal: "linear-gradient(90deg,#243B55,#141E30)",
     sopink: "linear-gradient(90deg,#ff0084,#33001b)",
     teal: "linear-gradient(125deg, rgb(0, 194, 194), rgb(0, 50, 80))",
     vanessa: "linear-gradient(125deg, #DA4453, #89216B)",
-    witching: "linear-gradient(125deg, #c31432, #3d0000)",
+    witching: "linear-gradient(to right, #c31432, #240b36)",
     wine: "linear-gradient(125deg,#b38ac4, #2e033d)",
 }
 
