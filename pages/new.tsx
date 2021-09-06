@@ -40,7 +40,7 @@ const bgs = {
     candy: "linear-gradient(125deg, rgb(243, 8, 118), rgb(47, 0, 255))",
     candytoo: "linear-gradient(125deg, #7303c0, #ec38bc)",
     educate: "linear-gradient(125deg, #0d324d, #7f5a83)",
-    grape: "linear-gradient(to left, #ad5389, #3c1053)",
+    grape: "linear-gradient(to right, #ad5389, #3c1053)",
     pinotnoir: "linear-gradient(90deg,#4b6cb7,#182848)",
     plain: "linear-gradient(90deg, #141418, #141418)",
     royal: "linear-gradient(90deg,#243B55,#141E30)",
@@ -51,7 +51,7 @@ const bgs = {
     wine: "linear-gradient(125deg,#b38ac4, #2e033d)",
 }
 
-const bgNames = ["fireandice", "candy", "candytoo", "educate", "pinotnoir", "plain", "royal", "sopink", "teal", "vanessa", "witching", "wine"];
+const bgNames = ["fireandice", "candy", "candytoo", "educate", "grape", "pinotnoir", "plain", "royal", "sopink", "teal", "vanessa", "witching", "wine"];
 
 const langOptions = [
     { value: 'cobol', label: 'Cobol', fileExtension: 'cbl' },
