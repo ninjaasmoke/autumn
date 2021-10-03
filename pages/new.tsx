@@ -144,6 +144,11 @@ const paddingSizes = {
     full: { w: "98%", h: "100%" },
 }
 
+const darknessBgs = {
+    "dark": { bgColor: "#202020" },
+    "darker": { bgColor: "#1a1a1a" },
+}
+
 
 
 const New: React.FC = () => {
@@ -158,6 +163,8 @@ const New: React.FC = () => {
 
     const [fileName, setFileName] = useState<string>("untitled." + selLang.fileExtension);
 
+    const [darkness, setDarkness] = useState(darknessBgs["darker"]);
+
     const [backgroundTheme, setBackgroundTheme] = useState<string>(bgNames[Math.floor(Math.random() * bgNames.length)]);
     return (
         <div className={newStyle.new}>
@@ -167,6 +174,35 @@ const New: React.FC = () => {
 
             <div className={newStyle.smallScreenMsg}>
                 Buy a bigger screen to use this app. 🙂
+            </div>
+
+            <div className={newStyle.download}
+                onClick={() => {
+                    // toJpeg(document.getElementById('editor'), { quality: 0.92 })
+                    //     .then(function (dataUrl) {
+                    //         var link = document.createElement('a');
+                    //         link.download = fileName + ".jpeg";
+                    //         link.href = dataUrl;
+                    //         link.click();
+                    //     });
+                    toPng(document.getElementById('editor'))
+                        .then(function (blob) {
+                            const link = document.createElement('a');
+                            link.download = fileName + ".png";
+                            link.href = blob;
+                            link.click();
+                        })
+                }} >
+                <motion.img
+                    src="/icons/download.png"
+                    alt="Download"
+                    transition={{ duration: .3 }}
+                />
+                <motion.p
+                    animate={{
+                        display: openRightBar ? 'block' : 'none'
+                    }}
+                >Download</motion.p>
             </div>
 
             <EditorElem
@@ -180,6 +216,7 @@ const New: React.FC = () => {
                 ext={selLang.fileExtension}
                 fileName={fileName}
                 setFileName={setFileName}
+                darkness={darkness.bgColor}
             />
 
             <motion.div
@@ -190,36 +227,6 @@ const New: React.FC = () => {
             >
                 <div
                     className={newStyle.rEles}>
-
-                    <div className={newStyle.rEle}
-                        style={{ padding: '12px 0px' }}
-                        onClick={() => {
-                            // toJpeg(document.getElementById('editor'), { quality: 0.92 })
-                            //     .then(function (dataUrl) {
-                            //         var link = document.createElement('a');
-                            //         link.download = fileName + ".jpeg";
-                            //         link.href = dataUrl;
-                            //         link.click();
-                            //     });
-                            toPng(document.getElementById('editor'))
-                                .then(function (blob) {
-                                    const link = document.createElement('a');
-                                    link.download = fileName + ".png";
-                                    link.href = blob;
-                                    link.click();
-                                })
-                        }} >
-                        <motion.img
-                            src="/icons/download.png"
-                            alt="Download"
-                            transition={{ duration: .3 }}
-                        />
-                        <motion.p
-                            animate={{
-                                display: openRightBar ? 'block' : 'none'
-                            }}
-                        >Download</motion.p>
-                    </div>
 
                     <div style={{
                         display: openRightBar ? "block" : "none",
@@ -281,7 +288,7 @@ const New: React.FC = () => {
 
                                             /* Close fullscreen */
                                             function closeFullscreen() {
-                                                if ( document.fullscreenElement && document.exitFullscreen) {
+                                                if (document.fullscreenElement && document.exitFullscreen) {
                                                     try {
                                                         document.exitFullscreen();
                                                     } catch (e) {
@@ -304,6 +311,27 @@ const New: React.FC = () => {
                                                 color: padSize.w === paddingSizes[pad].w && padSize.h === paddingSizes[pad].h ? "black" : "var(--color)",
                                             }}>
                                             {pad}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+
+                        <h5>Darkness</h5>
+                        <div className={newStyle.darkOptions}>
+                            {
+                                Object.keys(darknessBgs).map((dark, i) => {
+                                    return (
+                                        <div key={i} onClick={() => {
+                                            setDarkness(darknessBgs[dark]);
+                                        }}
+                                            className={newStyle.darkOption}
+                                            style={{
+                                                background: darkness === darknessBgs[dark] ? "var(--accent)" : "var(--secBg)",
+                                                fontWeight: darkness === darknessBgs[dark] ? 700 : 400,
+                                                color: darkness === darknessBgs[dark] ? "black" : "var(--color)",
+                                            }}>
+                                            {dark}
                                         </div>
                                     )
                                 })
@@ -368,10 +396,11 @@ interface EditorProps {
     fileName: string,
     setFileName: React.Dispatch<React.SetStateAction<string>>,
     edWidth: number,
-    edHeight: number
+    edHeight: number,
+    darkness: string,
 
 }
-const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, theme, ext, fileName, setFileName, edHeight, edWidth }) => {
+const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, theme, ext, fileName, setFileName, edHeight, edWidth, darkness }) => {
     const [mounted, setMounted] = useState(false);
     useEffect(() => {
         setMounted(true);
@@ -403,7 +432,11 @@ const EditorElem: React.FC<EditorProps> = ({ background, code, setCode, mode, th
                     background: bgs[background],
                 }}
             >
-                <div className={newStyle.editorPadding}>
+                <div className={newStyle.editorPadding}
+                    style={{
+                        backgroundColor: darkness,
+                    }}
+                >
                     <div className={newStyle.topBar}>
                         <div className={newStyle.topButtons}>
                             <div className={newStyle.topBarButton} style={{ backgroundColor: "rgb(196, 32, 20)" }} />
